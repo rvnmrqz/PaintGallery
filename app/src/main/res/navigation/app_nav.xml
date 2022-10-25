@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/listViewFragment">
+
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.arvinmarquez.paintgallery.presentation.list.ListViewFragment"
+        android:label="Paint Gallery"
+        tools:layout="@layout/fragment_list_view">
+        <action
+            android:id="@+id/action_listViewFragment_to_singleItemViewFragment"
+            app:destination="@id/singleItemViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleItemViewFragment"
+        android:name="com.arvinmarquez.paintgallery.presentation.single_view.SingleItemViewFragment"
+        tools:layout="@layout/fragment_single_item_view">
+        <action
+            android:id="@+id/action_singleItemViewFragment_to_listViewFragment"
+            app:destination="@id/listViewFragment" />
+        <argument
+            android:name="paintingId"
+            app:argType="long" />
+        <argument
+            android:name="paintingTitle"
+            app:argType="string" />
+    </fragment>
+</navigation>
