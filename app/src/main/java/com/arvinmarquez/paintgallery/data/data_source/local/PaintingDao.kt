@@ -17,6 +17,9 @@ interface PaintingDao {
     @Query("SELECT * FROM paintings")
     suspend fun getPaintings(): List<PaintingEntity>
 
+    @Query("SELECT * FROM paintings LIMIT :limit OFFSET :offset")
+    suspend fun getPaintings(limit: Int, offset: Int? = 0): List<PaintingEntity>
+
     @Query("SELECT * FROM paintings WHERE id = :id")
     fun getLivePainting(id: Long): Flow<PaintingEntity?>
 

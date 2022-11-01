@@ -54,7 +54,7 @@ class ListViewModel @Inject constructor(
                     }
                     Status.ERROR -> {
                         loading = false
-                        _stateFlow.value = ListViewState(hasError = true, message = it.message)
+                        _stateFlow.value = ListViewState( list = it.data ?: emptyList(), hasError = true, message = it.message)
                     }
                 }
             }
@@ -89,11 +89,19 @@ class ListViewModel @Inject constructor(
                     }
                     Status.ERROR -> {
                         loading = false
-                        _stateFlow.value = ListViewState(hasError = true, message = it.message)
+                        _stateFlow.value = ListViewState(
+                            list = it.data ?: emptyList(),
+                            hasError = true,
+                            message = it.message
+                        )
                     }
                 }
             }
         }
+    }
+
+    fun reloadData(){
+
     }
 
 

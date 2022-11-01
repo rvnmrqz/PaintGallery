@@ -1,7 +1,6 @@
 package com.arvinmarquez.paintgallery.presentation.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arvinmarquez.paintgallery.databinding.FragmentListViewBinding
 import com.arvinmarquez.paintgallery.presentation.list.adapter.LoadingAdapter
 import com.arvinmarquez.paintgallery.presentation.list.adapter.PaintingListAdapter
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -81,6 +79,7 @@ class ListViewFragment : Fragment() {
                     showListLoading(!it.maxPageLoaded)
                     listAdapter.setItems(it.list)
                 } else {
+                    listAdapter.setItems(it.list)
                     showError(it.message ?: "Unexpected error occurred")
                 }
             }
@@ -102,7 +101,7 @@ class ListViewFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        showLoading(true)
+        showLoading(false)
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 }

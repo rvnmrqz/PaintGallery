@@ -19,12 +19,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
             query().map { Resource.success(it) }
         } catch (throwable: Throwable) {
             onFetchFailed(throwable)
-
-            if(data!=null){
-                query().map { Resource.success(it) }
-            }else{
-                query().map { Resource.error(throwable.localizedMessage ?:"Unknown Error", it) }
-            }
+            query().map { Resource.error(throwable.localizedMessage ?: "Unknown Error", it) }
         }
     } else {
         query().map { Resource.success(it) }

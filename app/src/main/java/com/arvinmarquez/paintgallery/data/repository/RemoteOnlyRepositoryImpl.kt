@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class PaintingRepositoryImpl @Inject constructor(
-    private val paintingApi: PaintGalleryApi
+class RemoteOnlyRepositoryImpl @Inject constructor(
+    private val api: PaintGalleryApi
 ) : PaintingRepository {
 
     override suspend fun getList(page: Int): Flow<Resource<List<Painting>>> {
@@ -18,7 +18,7 @@ class PaintingRepositoryImpl @Inject constructor(
             emit(Resource.loading())
 
             try {
-                val response = paintingApi.list(page)
+                val response = api.list(page)
 
                 if (response.isSuccessful) {
                     val list = response.body()?.list?.map { it.toDomain() } ?: emptyList()
@@ -38,7 +38,7 @@ class PaintingRepositoryImpl @Inject constructor(
         return flow {
             emit(Resource.loading())
 
-            val response = paintingApi.getPainting(id)
+            val response = api.getPainting(id)
             if (response.isSuccessful) {
                 response.body()?.let {
                     emit(Resource.success(it.toDomain()))
